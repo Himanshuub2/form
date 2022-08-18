@@ -1,6 +1,6 @@
 import react from "react"
 import {useState} from "react";
-
+import {addUser} from "../api";
 const defaultVal = {
     "name":"",
     "city":"",
@@ -11,10 +11,16 @@ const Signup = ()=>{
     const [user,setUser] = useState(defaultVal);
 
     const handleChange = (e)=>{
-        setUser ({...defaultVal,name:e.target.value})
+        setUser ({...user,[e.target.name]:e.target.value})
         console.log(user);
     }
-    
+    const handleClick = ()=>{
+        addUser(user);
+    }
+
+    const handleReset = ()=>{
+        setUser(defaultVal);
+    }
     return (
         <div style = {{width:"10vw"}}>
         <label>Name</label>
@@ -24,6 +30,7 @@ const Signup = ()=>{
         <label>Age</label>
         <input onChange = {(e)=>handleChange(e)} name ="age"></input>
         <button onClick = {handleClick}>Submit</button>
+        <button onClick = {handleReset} >Reset</button>
         </div>
     )
 }
